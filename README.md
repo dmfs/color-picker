@@ -35,6 +35,11 @@ The calling activity or fragment should implement `ColorPickerDialogFragment.OnC
 
 ## Screen shots
 
+![](https://raw.github.com/dmfs/color-picker/master/demo/screenshots/screenshot_1.png "Screenshot 1")
+
+![](https://raw.github.com/dmfs/color-picker/master/demo/screenshots/screenshot_2.png "Screenshot 2")
+
+![](https://raw.github.com/dmfs/color-picker/master/demo/screenshots/screenshot_3.png "Screenshot 3")
 
 
 ## TODO
