@@ -1,0 +1,43 @@
+<resources>
+
+    <string name="base_palette_name">Base</string>
+
+    <integer-array name="base_palette_colors">
+        <item>0xff000000</item>
+        <item>0xff000080</item>
+        <item>0xff008000</item>
+        <item>0xff800000</item>
+        <item>0xff800080</item>
+        <item>0xff808000</item>
+        <item>0xff008080</item>
+        <item>0xff808080</item>
+        <item>0xff404040</item>
+        <item>0xff0000ff</item>
+        <item>0xff00ff00</item>
+        <item>0xffff0000</item>
+        <item>0xffff00ff</item>
+        <item>0xffffff00</item>
+        <item>0xff00ffff</item>
+        <item>0xffffffff</item>
+    </integer-array>
+
+    <string-array name="base_palette_color_names">
+        <item>Black</item>
+        <item>Dark blue</item>
+        <item>Dark green</item>
+        <item>Dark red</item>
+        <item>Purple</item>
+        <item>Dark yellow</item>
+        <item>Dark cyan</item>
+        <item>Dark white</item>
+        <item>Grey</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Red</item>
+        <item>Pink</item>
+        <item>Yellow</item>
+        <item>Cyan</item>
+        <item>White</item>
+    </string-array>
+
+</resources>

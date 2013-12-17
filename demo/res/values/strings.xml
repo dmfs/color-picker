@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Colorpicker Demo</string>
+    <string name="action_settings">Settings</string>
+    <string name="pick_a_color">Pick a color …</string>
+    <string name="youve_picked">You\'ve picked:</string>
+    <string name="dialog_title_pick_a_color">Pick a color …</string>
+
+</resources>
