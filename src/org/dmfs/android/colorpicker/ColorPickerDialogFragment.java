@@ -21,11 +21,12 @@ package org.dmfs.android.colorpicker;
 
 import org.dmfs.android.colorpicker.PaletteFragment.OnColorSelectedListener;
 import org.dmfs.android.colorpicker.palettes.AbstractPalette;
+import org.dmfs.android.instancestatehelper.SupportDialogFragment;
+import org.dmfs.android.instancestatehelper.annotations.Retain;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -36,12 +37,8 @@ import android.view.ViewGroup;
 /**
  * @author Marten Gajda <marten@dmfs.org>
  */
-public class ColorPickerDialogFragment extends DialogFragment implements OnColorSelectedListener
+public class ColorPickerDialogFragment extends SupportDialogFragment implements OnColorSelectedListener
 {
-	private final static String KEY_PALETTES = "org.dmfs.android.colorpicker.PALETTES";
-	private final static String KEY_TITLE = "org.dmfs.android.colorpicker.TITLE";
-	private final static String KEY_TITLE_ID = "org.dmfs.android.colorpicker.TITLE_ID";
-
 	public interface OnColorChangedListener
 	{
 		public void onColorChanged(int color, String colorName, String paletteName);
@@ -49,19 +46,13 @@ public class ColorPickerDialogFragment extends DialogFragment implements OnColor
 
 	private ViewPager mPager;
 	private PalettesPagerAdapter mPagerAdapter;
+
+	@Retain
 	private AbstractPalette[] mPalettes;
+	@Retain
 	private CharSequence mTitle = null;
+	@Retain
 	private int mTitleId = 0;
-
-
-	@Override
-	public void onSaveInstanceState(Bundle outState)
-	{
-		super.onSaveInstanceState(outState);
-		outState.putParcelableArray(KEY_PALETTES, mPalettes);
-		outState.putCharSequence(KEY_TITLE, mTitle);
-		outState.putInt(KEY_TITLE_ID, mTitleId);
-	}
 
 
 	/**
@@ -115,12 +106,8 @@ public class ColorPickerDialogFragment extends DialogFragment implements OnColor
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		if (savedInstanceState != null)
-		{
-			mPalettes = (AbstractPalette[]) savedInstanceState.getParcelableArray(KEY_PALETTES);
-			mTitle = savedInstanceState.getCharSequence(KEY_TITLE);
-			mTitleId = savedInstanceState.getInt(KEY_TITLE_ID);
-		}
+		super.onCreateView(inflater, container, savedInstanceState);
+
 		View view = inflater.inflate(R.layout.org_dmfs_colorpickerdialog_fragment, container);
 
 		mPager = (ViewPager) view.findViewById(R.id.pager);

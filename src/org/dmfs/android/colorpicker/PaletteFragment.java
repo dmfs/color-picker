@@ -20,6 +20,8 @@
 package org.dmfs.android.colorpicker;
 
 import org.dmfs.android.colorpicker.palettes.AbstractPalette;
+import org.dmfs.android.instancestatehelper.SupportFragment;
+import org.dmfs.android.instancestatehelper.annotations.Retain;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,13 +43,8 @@ import android.widget.LinearLayout.LayoutParams;
  * 
  * @author Marten Gajda <marten@dmfs.org>
  */
-public class PaletteFragment extends Fragment implements OnItemClickListener
+public class PaletteFragment extends SupportFragment implements OnItemClickListener
 {
-	/**
-	 * Key to store the palette in a {@link Bundle}.
-	 */
-	private final static String KEY_PALETTE = "org.dmfs.android.colorpicker.PALETTE";
-
 	public interface OnColorSelectedListener
 	{
 		public void onColorSelected(int color, String colorName, String paletteName);
@@ -56,20 +53,13 @@ public class PaletteFragment extends Fragment implements OnItemClickListener
 	/**
 	 * The palette to show.
 	 */
+	@Retain
 	private AbstractPalette mPalette;
 
 	/**
 	 * An adapter for the palette.
 	 */
 	private PaletteGridAdapter mAdapter;
-
-
-	@Override
-	public void onSaveInstanceState(Bundle outState)
-	{
-		super.onSaveInstanceState(outState);
-		outState.putParcelable(KEY_PALETTE, mPalette);
-	}
 
 
 	public void setPalette(AbstractPalette palette)
@@ -81,11 +71,7 @@ public class PaletteFragment extends Fragment implements OnItemClickListener
 	@Override
 	public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		if (savedInstanceState != null)
-		{
-			// load the palette from the bundle
-			mPalette = savedInstanceState.getParcelable(KEY_PALETTE);
-		}
+		super.onCreateView(inflater, container, savedInstanceState);
 
 		/*
 		 * TODO: build the layout programmatically to get rid of the resources, so we can distribute this in a single jar
