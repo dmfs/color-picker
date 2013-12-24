@@ -32,11 +32,19 @@ import android.os.Parcelable;
 public abstract class AbstractPalette implements Parcelable
 {
 	/**
-	 * Get the name of the palette.
+	 * Get the display name of the palette.
 	 * 
 	 * @return The name of the palette.
 	 */
 	public abstract String getName();
+
+
+	/**
+	 * Get the id of the palette.
+	 * 
+	 * @return An Id of the palette.
+	 */
+	public abstract String getId();
 
 
 	/**

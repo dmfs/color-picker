@@ -18,8 +18,8 @@ To show the dialog, just get an instance, add a number of palettes and call the 
 		// set the palettes
 		d.setPalettes(new AbstractPalette[]
 		{
-			ArrayPalette.fromResources(this, R.string.base_palette_name, R.array.base_palette_colors, R.array.base_palette_color_names),
-			new FactoryPalette("Rainbow", ColorFactory.RAINBOW, 16)
+			ArrayPalette.fromResources(this, "basecolors", R.string.base_palette_name, R.array.base_palette_colors, R.array.base_palette_color_names),
+			new FactoryPalette("rainbow", "Rainbow", ColorFactory.RAINBOW, 16)
 		});
 		
 		d.show(getSupportFragmentManager(), tag);
@@ -47,7 +47,7 @@ The calling activity or fragment should implement `ColorPickerDialogFragment.OnC
 * fix landscape mode on smaller screens
 * fix selected/focused backgrounds
 * allow to customize color shapes
-* allow to preselect a specific palette and/or color
+* allow to preselect a specific color
 * show a palette preview in title strip
 * add support for other fragment types, like hex input or color wheels
 

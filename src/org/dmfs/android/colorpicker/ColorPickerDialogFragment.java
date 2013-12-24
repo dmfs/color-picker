@@ -21,27 +21,30 @@ package org.dmfs.android.colorpicker;
 
 import org.dmfs.android.colorpicker.PaletteFragment.OnColorSelectedListener;
 import org.dmfs.android.colorpicker.palettes.AbstractPalette;
-import org.dmfs.android.instancestatehelper.SupportDialogFragment;
-import org.dmfs.android.instancestatehelper.annotations.Retain;
+import org.dmfs.android.persistencehelper.SupportDialogFragment;
+import org.dmfs.android.persistencehelper.annotations.Retain;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
 /**
+ * A fragment that shows a color picker with multiple palettes to choose from.
+ * 
  * @author Marten Gajda <marten@dmfs.org>
  */
 public class ColorPickerDialogFragment extends SupportDialogFragment implements OnColorSelectedListener
 {
 	public interface OnColorChangedListener
 	{
-		public void onColorChanged(int color, String colorName, String paletteName);
+		public void onColorChanged(int color, String paletteId, String colorName, String paletteName);
 	}
 
 	private ViewPager mPager;
@@ -54,6 +57,11 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 	@Retain
 	private int mTitleId = 0;
 
+	/**
+	 * The index of the selected palette.
+	 */
+	private int mSelected = 0;
+
 
 	/**
 	 * Set the palettes to show.
@@ -64,6 +72,36 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 	public void setPalettes(AbstractPalette[] palettes)
 	{
 		mPalettes = palettes;
+	}
+
+
+	/**
+	 * Switch to a specific palette with the given ID. Has no effect if no palette with that id is found.
+	 * 
+	 * @param id
+	 *            The id of the palette to select.
+	 */
+	public void selectPaletteId(String id)
+	{
+		if (mPalettes == null || id == null)
+		{
+			return;
+		}
+
+		int index = 0;
+		for (AbstractPalette palette : mPalettes)
+		{
+			if (TextUtils.equals(id, palette.getId()))
+			{
+				mSelected = index;
+				if (mPager != null && mPagerAdapter != null)
+				{
+					mPager.setCurrentItem(mPagerAdapter.getCount() / 2 + mSelected);
+				}
+				return;
+			}
+			++index;
+		}
 	}
 
 
@@ -106,15 +144,13 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		super.onCreateView(inflater, container, savedInstanceState);
-
 		View view = inflater.inflate(R.layout.org_dmfs_colorpickerdialog_fragment, container);
 
 		mPager = (ViewPager) view.findViewById(R.id.pager);
 		mPagerAdapter = new PalettesPagerAdapter(getChildFragmentManager(), mPalettes);
 		mPagerAdapter.notifyDataSetChanged();
 		mPager.setAdapter(mPagerAdapter);
-		mPager.setCurrentItem(mPagerAdapter.getCount() / 2);
+		mPager.setCurrentItem(mPagerAdapter.getCount() / 2 + mSelected);
 
 		Dialog dialog = getDialog();
 		if (dialog != null)
@@ -133,7 +169,7 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 
 
 	@Override
-	public void onColorSelected(int color, String colorName, String paletteName)
+	public void onColorSelected(int color, String paletteId, String colorName, String paletteName)
 	{
 		OnColorChangedListener listener = null;
 		Fragment parentFragment = getParentFragment();
@@ -150,7 +186,7 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 
 		if (listener != null)
 		{
-			listener.onColorChanged(color, colorName, paletteName);
+			listener.onColorChanged(color, paletteId, colorName, paletteName);
 		}
 
 		dismiss();

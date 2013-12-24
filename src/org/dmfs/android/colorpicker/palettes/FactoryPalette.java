@@ -27,9 +27,14 @@ public class FactoryPalette extends AbstractPalette implements Parcelable
 {
 
 	/**
-	 * The name of this palette.
+	 * The display name of this palette.
 	 */
 	private String mName;
+
+	/**
+	 * The Id of this palette.
+	 */
+	private String mPaletteId;
 
 	/**
 	 * The colors in this palette.
@@ -53,6 +58,8 @@ public class FactoryPalette extends AbstractPalette implements Parcelable
 	/**
 	 * Build a new palette with a custom {@link ColorFactory}.
 	 * 
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param name
 	 *            The name of the palette.
 	 * @param colorProvider
@@ -63,8 +70,9 @@ public class FactoryPalette extends AbstractPalette implements Parcelable
 	 * @param columns
 	 *            The number of columns to use in the layout
 	 */
-	public FactoryPalette(String name, ColorFactory colorProvider, int count, int columns)
+	public FactoryPalette(String id, String name, ColorFactory colorProvider, int count, int columns)
 	{
+		mPaletteId = id;
 		mName = name;
 		int[] values = new int[count];
 		for (int i = 0; i < count; ++i)
@@ -79,6 +87,8 @@ public class FactoryPalette extends AbstractPalette implements Parcelable
 	/**
 	 * Build a new palette with a custom {@link ColorFactory}.
 	 * 
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param name
 	 *            The name of the palette.
 	 * @param colorProvider
@@ -86,9 +96,9 @@ public class FactoryPalette extends AbstractPalette implements Parcelable
 	 * @param count
 	 *            The number of colors to generate in this palette.
 	 */
-	public FactoryPalette(String name, ColorFactory colorProvider, int count)
+	public FactoryPalette(String id, String name, ColorFactory colorProvider, int count)
 	{
-		this(name, colorProvider, count, (int) Math.floor(Math.sqrt(count)));
+		this(id, name, colorProvider, count, (int) Math.floor(Math.sqrt(count)));
 	}
 
 
@@ -101,6 +111,18 @@ public class FactoryPalette extends AbstractPalette implements Parcelable
 	public String getName()
 	{
 		return mName;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dmfs.android.colorpicker.palettes.AbstractPalette#getId()
+	 */
+	@Override
+	public String getId()
+	{
+		return mPaletteId;
 	}
 
 

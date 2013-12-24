@@ -29,9 +29,10 @@ import org.dmfs.android.colorpicker.palettes.ColorFactory;
 import org.dmfs.android.colorpicker.palettes.ColorFactory.CombinedColorFactory;
 import org.dmfs.android.colorpicker.palettes.FactoryPalette;
 import org.dmfs.android.colorpicker.palettes.RandomPalette;
+import org.dmfs.android.persistencehelper.FragmentActivity;
+import org.dmfs.android.persistencehelper.annotations.Retain;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -43,6 +44,9 @@ public class DemoActivity extends FragmentActivity implements OnColorChangedList
 
 	private TextView mTextView;
 	private View mColorBox;
+
+	@Retain(permanent = true, classNS = "DemoActivity")
+	private String mSelectedPalette = null;
 
 
 	@Override
@@ -62,59 +66,59 @@ public class DemoActivity extends FragmentActivity implements OnColorChangedList
 		ArrayList<AbstractPalette> palettes = new ArrayList<AbstractPalette>();
 
 		// add a palette from the resources
-		palettes.add(ArrayPalette.fromResources(this, R.string.base_palette_name, R.array.base_palette_colors, R.array.base_palette_color_names));
+		palettes.add(ArrayPalette.fromResources(this, "base", R.string.base_palette_name, R.array.base_palette_colors, R.array.base_palette_color_names));
 
-		palettes.add(new ArrayPalette("Base 2", COLORS));
+		palettes.add(new ArrayPalette("base2", "Base 2", COLORS));
 
 		// Add a palette with rainbow colors
-		palettes.add(new FactoryPalette("Rainbow", ColorFactory.RAINBOW, 16));
+		palettes.add(new FactoryPalette("rainbow", "Rainbow", ColorFactory.RAINBOW, 16));
 
 		// Add a palette with many darker rainbow colors
-		palettes.add(new FactoryPalette("Dirty Rainbow", new ColorFactory.RainbowColorFactory(0.5f, 0.5f), 16));
+		palettes.add(new FactoryPalette("rainbow2", "Dirty Rainbow", new ColorFactory.RainbowColorFactory(0.5f, 0.5f), 16));
 
 		// Add a palette with pastel colors
-		palettes.add(new FactoryPalette("Pastel", ColorFactory.PASTEL, 16));
+		palettes.add(new FactoryPalette("pastel", "Pastel", ColorFactory.PASTEL, 16));
 
 		// Add a palette with red+orange colors
-		palettes.add(new FactoryPalette("Red/Orange", new CombinedColorFactory(ColorFactory.RED, ColorFactory.ORANGE), 16));
+		palettes.add(new FactoryPalette("red/orange", "Red/Orange", new CombinedColorFactory(ColorFactory.RED, ColorFactory.ORANGE), 16));
 
 		// Add a palette with yellow+green colors
-		palettes.add(new FactoryPalette("Yellow/Green", new CombinedColorFactory(ColorFactory.YELLOW, ColorFactory.GREEN), 16));
+		palettes.add(new FactoryPalette("yellow/green", "Yellow/Green", new CombinedColorFactory(ColorFactory.YELLOW, ColorFactory.GREEN), 16));
 
 		// Add a palette with cyan+blue colors
-		palettes.add(new FactoryPalette("Cyan/Blue", new CombinedColorFactory(ColorFactory.CYAN, ColorFactory.BLUE), 16));
+		palettes.add(new FactoryPalette("cyan/blue", "Cyan/Blue", new CombinedColorFactory(ColorFactory.CYAN, ColorFactory.BLUE), 16));
 
 		// Add a palette with purple+pink colors
-		palettes.add(new FactoryPalette("Purple/Pink", new CombinedColorFactory(ColorFactory.PURPLE, ColorFactory.PINK), 16));
+		palettes.add(new FactoryPalette("purble/pink", "Purple/Pink", new CombinedColorFactory(ColorFactory.PURPLE, ColorFactory.PINK), 16));
 
 		// Add a palette with red colors
-		palettes.add(new FactoryPalette("Red", ColorFactory.RED, 16));
+		palettes.add(new FactoryPalette("red", "Red", ColorFactory.RED, 16));
 		// Add a palette with green colors
-		palettes.add(new FactoryPalette("Green", ColorFactory.GREEN, 16));
+		palettes.add(new FactoryPalette("green", "Green", ColorFactory.GREEN, 16));
 		// Add a palette with blue colors
-		palettes.add(new FactoryPalette("Blue", ColorFactory.BLUE, 16));
+		palettes.add(new FactoryPalette("blue", "Blue", ColorFactory.BLUE, 16));
 
 		// Add a palette with few random colors
-		palettes.add(new RandomPalette("Random 1", 1));
+		palettes.add(new RandomPalette("random1", "Random 1", 1));
 		// Add a palette with few random colors
-		palettes.add(new RandomPalette("Random 4", 4));
+		palettes.add(new RandomPalette("random4", "Random 4", 4));
 		// Add a palette with few random colors
-		palettes.add(new RandomPalette("Random 9", 9));
+		palettes.add(new RandomPalette("random9", "Random 9", 9));
 		// Add a palette with few random colors
-		palettes.add(new RandomPalette("Random 19", 16));
+		palettes.add(new RandomPalette("random16", "Random 16", 16));
 
 		// Add a palette with random colors
-		palettes.add(new RandomPalette("Random 25", 25));
+		palettes.add(new RandomPalette("random25", "Random 25", 25));
 
 		// Add a palette with many random colors
-		palettes.add(new RandomPalette("Random 81", 81));
+		palettes.add(new RandomPalette("random81", "Random 81", 81));
 
 		// Add a palette with secondary colors
-		palettes.add(new FactoryPalette("Secondary 1", new CombinedColorFactory(new ColorFactory.ColorShadeFactory(18), new ColorFactory.ColorShadeFactory(53),
-			new ColorFactory.ColorShadeFactory(80), new ColorFactory.ColorShadeFactory(140)), 16, 4));
+		palettes.add(new FactoryPalette("secondary1", "Secondary 1", new CombinedColorFactory(new ColorFactory.ColorShadeFactory(18),
+			new ColorFactory.ColorShadeFactory(53), new ColorFactory.ColorShadeFactory(80), new ColorFactory.ColorShadeFactory(140)), 16, 4));
 
 		// Add another palette with secondary colors
-		palettes.add(new FactoryPalette("Secondary 2", new CombinedColorFactory(new ColorFactory.ColorShadeFactory(210),
+		palettes.add(new FactoryPalette("secondary2", "Secondary 2", new CombinedColorFactory(new ColorFactory.ColorShadeFactory(210),
 			new ColorFactory.ColorShadeFactory(265), new ColorFactory.ColorShadeFactory(300), new ColorFactory.ColorShadeFactory(340)), 16, 4));
 
 		// set the palettes
@@ -123,16 +127,20 @@ public class DemoActivity extends FragmentActivity implements OnColorChangedList
 		// set a title
 		d.setTitle(R.string.dialog_title_pick_a_color);
 
+		// set the initial palette
+		d.selectPaletteId(mSelectedPalette);
+
 		// show the fragment
 		d.show(getSupportFragmentManager(), "");
 	}
 
 
 	@Override
-	public void onColorChanged(int color, String colorName, String paletteName)
+	public void onColorChanged(int color, String paletteId, String colorName, String paletteName)
 	{
 		mColorBox.setBackgroundColor(color);
 		mTextView.setText(colorName == null ? " from \"" + paletteName + "\"" : "\"" + colorName + "\" from \"" + paletteName + "\"");
+		mSelectedPalette = paletteId;
 	}
 
 }

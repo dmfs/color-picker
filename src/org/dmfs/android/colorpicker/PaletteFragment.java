@@ -20,8 +20,8 @@
 package org.dmfs.android.colorpicker;
 
 import org.dmfs.android.colorpicker.palettes.AbstractPalette;
-import org.dmfs.android.instancestatehelper.SupportFragment;
-import org.dmfs.android.instancestatehelper.annotations.Retain;
+import org.dmfs.android.persistencehelper.SupportFragment;
+import org.dmfs.android.persistencehelper.annotations.Retain;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,7 +47,7 @@ public class PaletteFragment extends SupportFragment implements OnItemClickListe
 {
 	public interface OnColorSelectedListener
 	{
-		public void onColorSelected(int color, String colorName, String paletteName);
+		public void onColorSelected(int color, String paletteId, String colorName, String paletteName);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class PaletteFragment extends SupportFragment implements OnItemClickListe
 		if (parent instanceof OnColorSelectedListener)
 		{
 			OnColorSelectedListener listener = (OnColorSelectedListener) parent;
-			listener.onColorSelected(mPalette.getColor(position), mPalette.getColorName(position), mPalette.getName());
+			listener.onColorSelected(mPalette.getColor(position), mPalette.getId(), mPalette.getColorName(position), mPalette.getName());
 		}
 	}
 }

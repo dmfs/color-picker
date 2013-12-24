@@ -40,6 +40,11 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	private String mPaletteName;
 
 	/**
+	 * The Id of this palette.
+	 */
+	private String mPaletteId;
+
+	/**
 	 * The colors in this palette.
 	 */
 	private int[] mColors;
@@ -60,6 +65,8 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 * 
 	 * @param resources
 	 *            The {@link Resources}.
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param paletteName
 	 *            A string resource id for the palette name.
 	 * @param colorArray
@@ -70,9 +77,9 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 *            A string array resource for the color names.
 	 * @return An {@link ArrayPalette} instance.
 	 */
-	public static ArrayPalette fromResources(Resources resources, int paletteName, int colorArray, int columns, int colorNameArray)
+	public static ArrayPalette fromResources(Resources resources, String id, int paletteName, int colorArray, int columns, int colorNameArray)
 	{
-		return new ArrayPalette(resources.getString(paletteName), resources.getIntArray(colorArray), columns, resources.getStringArray(colorNameArray));
+		return new ArrayPalette(id, resources.getString(paletteName), resources.getIntArray(colorArray), columns, resources.getStringArray(colorNameArray));
 	}
 
 
@@ -81,6 +88,8 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 * 
 	 * @param resources
 	 *            The {@link Resources}.
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param paletteName
 	 *            A string resource id for the palette name.
 	 * @param colorArray
@@ -89,9 +98,9 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 *            A string array resource for the color names.
 	 * @return An {@link ArrayPalette} instance.
 	 */
-	public static ArrayPalette fromResources(Resources resources, int paletteName, int colorArray, int colorNameArray)
+	public static ArrayPalette fromResources(Resources resources, String id, int paletteName, int colorArray, int colorNameArray)
 	{
-		return new ArrayPalette(resources.getString(paletteName), resources.getIntArray(colorArray), resources.getStringArray(colorNameArray));
+		return new ArrayPalette(id, resources.getString(paletteName), resources.getIntArray(colorArray), resources.getStringArray(colorNameArray));
 	}
 
 
@@ -100,15 +109,17 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 * 
 	 * @param resources
 	 *            The {@link Resources}.
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param paletteName
 	 *            A string resource id for the palette name.
 	 * @param colorArray
 	 *            The integer array resource id for the colors.
 	 * @return An {@link ArrayPalette} instance.
 	 */
-	public static ArrayPalette fromResources(Resources resources, int paletteName, int colorArray)
+	public static ArrayPalette fromResources(Resources resources, String id, int paletteName, int colorArray)
 	{
-		return new ArrayPalette(resources.getString(paletteName), resources.getIntArray(colorArray));
+		return new ArrayPalette(id, resources.getString(paletteName), resources.getIntArray(colorArray));
 	}
 
 
@@ -117,6 +128,8 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 * 
 	 * @param Context
 	 *            A {@link Context}.
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param paletteName
 	 *            A string resource id for the palette name.
 	 * @param colorArray
@@ -127,9 +140,9 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 *            A string array resource for the color names.
 	 * @return An {@link ArrayPalette} instance.
 	 */
-	public static ArrayPalette fromResources(Context context, int paletteName, int colorArray, int columns, int colorNameArray)
+	public static ArrayPalette fromResources(Context context, String id, int paletteName, int colorArray, int columns, int colorNameArray)
 	{
-		return fromResources(context.getResources(), paletteName, colorArray, columns, colorNameArray);
+		return fromResources(context.getResources(), id, paletteName, colorArray, columns, colorNameArray);
 	}
 
 
@@ -138,6 +151,8 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 * 
 	 * @param Context
 	 *            A {@link Context}.
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param paletteName
 	 *            A string resource id for the palette name.
 	 * @param colorArray
@@ -146,9 +161,9 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 *            A string array resource for the color names.
 	 * @return An {@link ArrayPalette} instance.
 	 */
-	public static ArrayPalette fromResources(Context context, int paletteName, int colorArray, int colorNameArray)
+	public static ArrayPalette fromResources(Context context, String id, int paletteName, int colorArray, int colorNameArray)
 	{
-		return fromResources(context.getResources(), paletteName, colorArray, colorNameArray);
+		return fromResources(context.getResources(), id, paletteName, colorArray, colorNameArray);
 	}
 
 
@@ -157,15 +172,17 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 * 
 	 * @param Context
 	 *            A {@link Context}.
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param paletteName
 	 *            A string resource id for the palette name.
 	 * @param colorArray
 	 *            The integer array resource id for the colors.
 	 * @return An {@link ArrayPalette} instance.
 	 */
-	public static ArrayPalette fromResources(Context context, int paletteName, int colorArray)
+	public static ArrayPalette fromResources(Context context, String id, int paletteName, int colorArray)
 	{
-		return fromResources(context.getResources(), paletteName, colorArray);
+		return fromResources(context.getResources(), id, paletteName, colorArray);
 	}
 
 
@@ -180,6 +197,8 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	/**
 	 * Build a new palette from arrays.
 	 * 
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param paletteName
 	 *            The name of the palette.
 	 * @param colors
@@ -189,8 +208,9 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 * @param names
 	 *            The names of the colors, or <code>null</code> if the colors don't have names.
 	 */
-	public ArrayPalette(String paletteName, int[] colors, int columns, String[] names)
+	public ArrayPalette(String id, String paletteName, int[] colors, int columns, String[] names)
 	{
+		mPaletteId = id;
 		mPaletteName = paletteName;
 		mColors = colors;
 		mColorNames = names;
@@ -201,6 +221,8 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	/**
 	 * Build a new palette from arrays using a square layout if possible.
 	 * 
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param paletteName
 	 *            The name of the palette.
 	 * @param colors
@@ -208,15 +230,17 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 * @param names
 	 *            The names of the colors, or <code>null</code> if the colors don't have names.
 	 */
-	public ArrayPalette(String paletteName, int[] colors, String[] names)
+	public ArrayPalette(String id, String paletteName, int[] colors, String[] names)
 	{
-		this(paletteName, colors, (int) Math.floor(Math.sqrt(colors.length)), names);
+		this(id, paletteName, colors, (int) Math.floor(Math.sqrt(colors.length)), names);
 	}
 
 
 	/**
 	 * Build a new palette from arrays.
 	 * 
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param paletteName
 	 *            The name of the palette.
 	 * @param colors
@@ -224,23 +248,25 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	 * @param columns
 	 *            The number of columns to show when determining the layout for this palette.
 	 */
-	public ArrayPalette(String paletteName, int[] colors, int columns)
+	public ArrayPalette(String id, String paletteName, int[] colors, int columns)
 	{
-		this(paletteName, colors, columns, null);
+		this(id, paletteName, colors, columns, null);
 	}
 
 
 	/**
 	 * Build a new palette from arrays using a square layout if possible.
 	 * 
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param paletteName
 	 *            The name of the palette.
 	 * @param colors
 	 *            An array of colors.
 	 */
-	public ArrayPalette(String paletteName, int[] colors)
+	public ArrayPalette(String id, String paletteName, int[] colors)
 	{
-		this(paletteName, colors, (int) Math.floor(Math.sqrt(colors.length)), null);
+		this(id, paletteName, colors, (int) Math.floor(Math.sqrt(colors.length)), null);
 	}
 
 
@@ -253,6 +279,18 @@ public class ArrayPalette extends AbstractPalette implements Parcelable
 	public String getName()
 	{
 		return mPaletteName;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dmfs.android.colorpicker.palettes.AbstractPalette#getId()
+	 */
+	@Override
+	public String getId()
+	{
+		return mPaletteId;
 	}
 
 

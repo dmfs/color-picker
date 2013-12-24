@@ -37,6 +37,11 @@ public class RandomPalette extends AbstractPalette
 	private String mName;
 
 	/**
+	 * The Id of this palette.
+	 */
+	private String mPaletteId;
+
+	/**
 	 * The colors in this palette.
 	 */
 	private int[] mValues;
@@ -53,13 +58,16 @@ public class RandomPalette extends AbstractPalette
 	/**
 	 * Create a palette with <code>count</code> random colors.
 	 * 
+	 * @param id
+	 *            An identifier for this palette.
 	 * @param name
 	 *            The name of this palette.
 	 * @param count
 	 *            The number of colors in this palette.
 	 */
-	public RandomPalette(String name, int count)
+	public RandomPalette(String id, String name, int count)
 	{
+		mPaletteId = id;
 		mName = name;
 		int[] values = new int[count];
 		for (int i = 0; i < count; ++i)
@@ -79,6 +87,18 @@ public class RandomPalette extends AbstractPalette
 	public String getName()
 	{
 		return mName;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dmfs.android.colorpicker.palettes.AbstractPalette#getId()
+	 */
+	@Override
+	public String getId()
+	{
+		return mPaletteId;
 	}
 
 
