@@ -39,7 +39,7 @@ public class PalettesPagerAdapter extends FragmentStatePagerAdapter
 	private AbstractPalette[] mPalettes;
 
 
-	public PalettesPagerAdapter(FragmentManager fm, AbstractPalette[] palettes)
+	public PalettesPagerAdapter(FragmentManager fm, AbstractPalette... palettes)
 	{
 		super(fm);
 		mPalettes = palettes;
