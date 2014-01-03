@@ -29,8 +29,8 @@ import org.dmfs.android.colorpicker.palettes.ColorFactory;
 import org.dmfs.android.colorpicker.palettes.ColorFactory.CombinedColorFactory;
 import org.dmfs.android.colorpicker.palettes.FactoryPalette;
 import org.dmfs.android.colorpicker.palettes.RandomPalette;
-import org.dmfs.android.persistencehelper.FragmentActivity;
-import org.dmfs.android.persistencehelper.annotations.Retain;
+import org.dmfs.android.retentionmagic.FragmentActivity;
+import org.dmfs.android.retentionmagic.annotations.Retain;
 
 import android.os.Bundle;
 import android.view.View;

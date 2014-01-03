@@ -20,8 +20,8 @@
 package org.dmfs.android.colorpicker;
 
 import org.dmfs.android.colorpicker.palettes.AbstractPalette;
-import org.dmfs.android.persistencehelper.SupportFragment;
-import org.dmfs.android.persistencehelper.annotations.Retain;
+import org.dmfs.android.retentionmagic.SupportFragment;
+import org.dmfs.android.retentionmagic.annotations.Retain;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

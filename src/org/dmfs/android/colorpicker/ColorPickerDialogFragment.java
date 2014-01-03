@@ -21,8 +21,8 @@ package org.dmfs.android.colorpicker;
 
 import org.dmfs.android.colorpicker.PaletteFragment.OnColorSelectedListener;
 import org.dmfs.android.colorpicker.palettes.AbstractPalette;
-import org.dmfs.android.persistencehelper.SupportDialogFragment;
-import org.dmfs.android.persistencehelper.annotations.Retain;
+import org.dmfs.android.retentionmagic.SupportDialogFragment;
+import org.dmfs.android.retentionmagic.annotations.Retain;
 
 import android.app.Activity;
 import android.app.Dialog;
