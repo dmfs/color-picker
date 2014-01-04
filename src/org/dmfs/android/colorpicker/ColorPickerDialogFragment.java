@@ -69,7 +69,7 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 	 * @param palettes
 	 *            An array of {@link AbstractPalette}s.
 	 */
-	public void setPalettes(AbstractPalette[] palettes)
+	public void setPalettes(AbstractPalette... palettes)
 	{
 		mPalettes = palettes;
 	}
