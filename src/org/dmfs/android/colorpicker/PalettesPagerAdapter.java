@@ -20,10 +20,19 @@
 package org.dmfs.android.colorpicker;
 
 import org.dmfs.android.colorpicker.palettes.AbstractPalette;
+import org.dmfs.android.view.IDrawableTitlePagerAdapter;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.util.LruCache;
 
 
 /**
@@ -31,18 +40,24 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  * 
  * @author Marten Gajda <marten@dmfs.org>
  */
-public class PalettesPagerAdapter extends FragmentStatePagerAdapter
+public class PalettesPagerAdapter extends FragmentStatePagerAdapter implements IDrawableTitlePagerAdapter
 {
+	private final static int PREVIEW_SIZE = 32; // dp
 
 	private final static int FACTOR = 100;
 
 	private AbstractPalette[] mPalettes;
+	private final Resources mResources;
+	private final float mDensity;
+	private final PreviewCache mCache = new PreviewCache(15);
 
 
-	public PalettesPagerAdapter(FragmentManager fm, AbstractPalette... palettes)
+	public PalettesPagerAdapter(Resources res, FragmentManager fm, AbstractPalette... palettes)
 	{
 		super(fm);
 		mPalettes = palettes;
+		mResources = res;
+		mDensity = res.getDisplayMetrics().density;
 	}
 
 
@@ -85,7 +100,7 @@ public class PalettesPagerAdapter extends FragmentStatePagerAdapter
 
 
 	/**
-	 * Get the actial postion from the "infinite" position.
+	 * Get the actual position from the "infinite" position.
 	 * 
 	 * @param position
 	 *            The position in the "infinite" list of palettes.
@@ -94,5 +109,55 @@ public class PalettesPagerAdapter extends FragmentStatePagerAdapter
 	private int mapPosition(int position)
 	{
 		return position % mPalettes.length;
+	}
+
+
+	@Override
+	public Drawable getDrawableTitle(int position)
+	{
+		return mCache.get(mapPosition(position));
+	}
+
+	/**
+	 * A cache for palette preview images.
+	 */
+	class PreviewCache extends LruCache<Integer, Drawable>
+	{
+
+		public PreviewCache(int maxSize)
+		{
+			super(maxSize);
+		}
+
+
+		@Override
+		protected Drawable create(Integer key)
+		{
+			AbstractPalette palette = mPalettes[key];
+			final int size = (int) (PREVIEW_SIZE * mDensity);
+			final int cols = palette.getNumberOfColumns();
+
+			Bitmap preview = Bitmap.createBitmap(size, size, Config.ARGB_8888);
+			Canvas canvas = new Canvas(preview);
+
+			final float spacing = 1.2f * mDensity;
+			final float halfSpacing = spacing / 2;
+			final float grid = (size + spacing) / cols;
+			final float radius = (grid - spacing) / 2;
+			Paint paint = new Paint();
+			paint.setFlags(Paint.ANTI_ALIAS_FLAG);
+
+			for (int j = 0, k = palette.getNumberOfColors() / cols; j < k; ++j)
+			{
+				for (int i = 0, l = cols; i < l; ++i)
+				{
+					paint.setColor(palette.getColor(j * cols + i) + 0xff000000);
+					// canvas.drawRect(i * grid, j * grid, (i + 1) * grid - spacing, (j + 1) * grid - spacing, paint);
+					canvas.drawCircle((i + 0.5f) * grid - halfSpacing, (j + 0.5f) * grid - halfSpacing, radius, paint);
+				}
+			}
+
+			return new BitmapDrawable(mResources, preview);
+		}
 	}
 }

@@ -7,7 +7,9 @@ This is a nice and simple color picker for Android. It allows to show any number
 
 ## Requirements
 
-The Android support library 19 or newer.
+* Android support library 19 or newer
+* [Retention Magic](https://github.com/dmfs/retention-magic)
+* [DrawablePagerTitleStrip](https://github.com/dmfs/DrawablePagerTitleStrip)
 
 ## Example code
 
@@ -48,9 +50,8 @@ The calling activity or fragment should implement `ColorPickerDialogFragment.OnC
 * fix selected/focused backgrounds
 * allow to customize color shapes
 * allow to preselect a specific color
-* show a palette preview in title strip
 * add support for other fragment types, like hex input or color wheels
 
 ## License
 
-Copyright (c) Marten Gajda 2012, licensed under GPL version 2 or newer (see `LICENSE`).
+Copyright (c) Marten Gajda 2013, licensed under GPL version 2 or newer (see `LICENSE`).

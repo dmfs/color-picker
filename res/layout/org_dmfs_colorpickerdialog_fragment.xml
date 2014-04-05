@@ -4,11 +4,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 
-    <android.support.v4.view.PagerTitleStrip
+    <org.dmfs.android.view.DrawablePagerTabStrip
         android:id="@+id/pager_title_strip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:padding="8dip" />
+        android:paddingBottom="4dip"
+        android:paddingLeft="8dip"
+        android:paddingRight="8dip"
+        android:paddingTop="0dip" />
 
 </org.dmfs.android.colorpicker.SquareViewPager>

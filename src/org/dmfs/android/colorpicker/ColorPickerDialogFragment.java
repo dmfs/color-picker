@@ -23,12 +23,12 @@ import org.dmfs.android.colorpicker.PaletteFragment.OnColorSelectedListener;
 import org.dmfs.android.colorpicker.palettes.AbstractPalette;
 import org.dmfs.android.retentionmagic.SupportDialogFragment;
 import org.dmfs.android.retentionmagic.annotations.Retain;
+import org.dmfs.android.view.ViewPager;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -147,7 +147,7 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 		View view = inflater.inflate(R.layout.org_dmfs_colorpickerdialog_fragment, container);
 
 		mPager = (ViewPager) view.findViewById(R.id.pager);
-		mPagerAdapter = new PalettesPagerAdapter(getChildFragmentManager(), mPalettes);
+		mPagerAdapter = new PalettesPagerAdapter(getResources(), getChildFragmentManager(), mPalettes);
 		mPagerAdapter.notifyDataSetChanged();
 		mPager.setAdapter(mPagerAdapter);
 		mPager.setCurrentItem(mPagerAdapter.getCount() / 2 + mSelected);
