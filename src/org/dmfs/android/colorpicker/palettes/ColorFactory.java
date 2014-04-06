@@ -29,7 +29,40 @@ public interface ColorFactory
 {
 
 	/**
-	 * A Factory that returns colors with a specific HUE value.
+	 * A Factory that returns colors with a specific hue and saturation. The lightness of all colors is spread evenly across the entire palette.
+	 * 
+	 * @author Marten Gajda <marten@dmfs.org>
+	 */
+	public class ColorLigthnessFactory implements ColorFactory
+	{
+		private final float[] mHSL = new float[] { 0, 0, 0 };
+
+
+		public ColorLigthnessFactory(float hue, float saturation)
+		{
+			mHSL[0] = hue;
+			mHSL[1] = saturation;
+		}
+
+
+		@Override
+		public int getColor(int index, int count)
+		{
+			if (count <= 1)
+			{
+				return Color.WHITE;
+			}
+
+			float[] hsl = mHSL;
+
+			hsl[2] = (float) index / (count - 1);
+
+			return Color.HSVToColor(255, hsl);
+		}
+	}
+
+	/**
+	 * A Factory that returns colors with a specific HUE value. This factory leaves out the edge cases - pure black and pure white.
 	 * 
 	 * @author Marten Gajda <marten@dmfs.org>
 	 */
@@ -53,13 +86,13 @@ public interface ColorFactory
 
 			if (index <= count / 2)
 			{
-				mHSL[1] = 1f;
-				mHSL[2] = index * 2f / count;
+				hsl[1] = 1f;
+				hsl[2] = index * 2f / count;
 			}
 			else
 			{
-				mHSL[1] = 2f - index * 2f / count;
-				mHSL[2] = 1f;
+				hsl[1] = 2f - index * 2f / count;
+				hsl[2] = 1f;
 			}
 			return Color.HSVToColor(255, hsl);
 		}
@@ -119,6 +152,11 @@ public interface ColorFactory
 		}
 
 	}
+
+	/**
+	 * Grey scale from black to white
+	 */
+	public final static ColorFactory GREY = new ColorLigthnessFactory(0, 0);
 
 	/**
 	 * Shades of red (0°).
