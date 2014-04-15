@@ -151,7 +151,7 @@ public class PalettesPagerAdapter extends FragmentStatePagerAdapter implements I
 			{
 				for (int i = 0, l = cols; i < l; ++i)
 				{
-					paint.setColor(palette.getColor(j * cols + i) + 0xff000000);
+					paint.setColor(palette.getColor(j * cols + i) | 0xff000000);
 					// canvas.drawRect(i * grid, j * grid, (i + 1) * grid - spacing, (j + 1) * grid - spacing, paint);
 					canvas.drawCircle((i + 0.5f) * grid - halfSpacing, (j + 0.5f) * grid - halfSpacing, radius, paint);
 				}
