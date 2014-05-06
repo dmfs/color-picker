@@ -27,6 +27,7 @@ import org.dmfs.android.view.ViewPager;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -42,9 +43,27 @@ import android.view.ViewGroup;
  */
 public class ColorPickerDialogFragment extends SupportDialogFragment implements OnColorSelectedListener
 {
-	public interface OnColorChangedListener
+	public interface ColorDialogResultListener
 	{
+		/**
+		 * Called when a color has been picked in the dialog.
+		 * 
+		 * @param color
+		 *            The color.
+		 * @param paletteId
+		 *            The id of the palette.
+		 * @param colorName
+		 *            The name of the color or <code>null</code>.
+		 * @param paletteName
+		 *            The name of the palette or <code>null</code>.
+		 */
 		public void onColorChanged(int color, String paletteId, String colorName, String paletteName);
+
+
+		/**
+		 * Called when the color picker dialog is cancelled without picking a color.
+		 */
+		public void onColorDialogCancelled();
 	}
 
 	private ViewPager mPager;
@@ -164,6 +183,8 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 				dialog.setTitle(mTitle);
 			}
 		}
+		dialog.setOnCancelListener(this);
+
 		return view;
 	}
 
@@ -171,18 +192,7 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 	@Override
 	public void onColorSelected(int color, String paletteId, String colorName, String paletteName)
 	{
-		OnColorChangedListener listener = null;
-		Fragment parentFragment = getParentFragment();
-		Activity parentActivity = getActivity();
-
-		if (parentFragment instanceof OnColorChangedListener)
-		{
-			listener = (OnColorChangedListener) parentFragment;
-		}
-		else if (parentActivity instanceof OnColorChangedListener)
-		{
-			listener = (OnColorChangedListener) parentActivity;
-		}
+		ColorDialogResultListener listener = getListener();
 
 		if (listener != null)
 		{
@@ -190,5 +200,41 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 		}
 
 		dismiss();
+	}
+
+
+	@Override
+	public void onCancel(DialogInterface dialog)
+	{
+		ColorDialogResultListener listener = getListener();
+
+		if (listener != null)
+		{
+			listener.onColorDialogCancelled();
+		}
+	}
+
+
+	/**
+	 * Get a {@link ColorDialogResultListener}. This should be either the parent {@link android.app.Fragment} or the parent {@link Activity}.
+	 * 
+	 * @return A {@link ColorDialogResultListener} or <code>null</code> if neither the parent {@link Activity} nor the parent {@link android.app.Fragment}
+	 *         implement this interface.
+	 */
+	private ColorDialogResultListener getListener()
+	{
+		ColorDialogResultListener listener = null;
+		Fragment parentFragment = getParentFragment();
+		Activity parentActivity = getActivity();
+
+		if (parentFragment instanceof ColorDialogResultListener)
+		{
+			listener = (ColorDialogResultListener) parentFragment;
+		}
+		else if (parentActivity instanceof ColorDialogResultListener)
+		{
+			listener = (ColorDialogResultListener) parentActivity;
+		}
+		return listener;
 	}
 }

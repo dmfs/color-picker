@@ -22,7 +22,7 @@ package org.dmfs.android.colorpicker.demo;
 import java.util.ArrayList;
 
 import org.dmfs.android.colorpicker.ColorPickerDialogFragment;
-import org.dmfs.android.colorpicker.ColorPickerDialogFragment.OnColorChangedListener;
+import org.dmfs.android.colorpicker.ColorPickerDialogFragment.ColorDialogResultListener;
 import org.dmfs.android.colorpicker.palettes.AbstractPalette;
 import org.dmfs.android.colorpicker.palettes.ArrayPalette;
 import org.dmfs.android.colorpicker.palettes.ColorFactory;
@@ -37,7 +37,7 @@ import android.view.View;
 import android.widget.TextView;
 
 
-public class DemoActivity extends FragmentActivity implements OnColorChangedListener
+public class DemoActivity extends FragmentActivity implements ColorDialogResultListener
 {
 	private final static int[] COLORS = new int[] { 0xff000000, 0xff0000ff, 0xff00ff00, 0xffff0000, 0xffffff00, 0xff00ffff, 0xffff00ff, 0xff404040, 0xff808080,
 		0xff8080ff, 0xff80ff80, 0xffff8080, 0xffffff80, 0xff80ffff, 0xffff80ff, 0xffffffff, };
@@ -141,6 +141,12 @@ public class DemoActivity extends FragmentActivity implements OnColorChangedList
 		mColorBox.setBackgroundColor(color);
 		mTextView.setText(colorName == null ? " from \"" + paletteName + "\"" : "\"" + colorName + "\" from \"" + paletteName + "\"");
 		mSelectedPalette = paletteId;
+	}
+
+
+	@Override
+	public void onColorDialogCancelled()
+	{
 	}
 
 }
