@@ -29,7 +29,7 @@ To show the dialog, just get an instance, add a number of palettes and call the 
 		d.show(getSupportFragmentManager(), tag);
 
 
-The calling activity or fragment should implement `ColorPickerDialogFragment.OnColorChangedListener` to get the result like:
+The calling activity or fragment should implement `ColorPickerDialogFragment.ColorDialogResultListener` to get the result like:
 
 		@Override
 		public void onColorChanged(int color, String colorName, String paletteName)
@@ -37,6 +37,11 @@ The calling activity or fragment should implement `ColorPickerDialogFragment.OnC
 			// do something with color
 		}
 
+		@Override
+		public void onColorDialogCancelled()
+		{
+			// handle cancelled color picker dialog
+		}
 
 ### Use via Intent
 
