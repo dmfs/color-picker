@@ -13,6 +13,8 @@ This is a nice and simple color picker for Android. It allows to show any number
 
 ## Example code
 
+### Use as a dialog
+
 To show the dialog, just get an instance, add a number of palettes and call the show method.
 
 		ColorPickerDialogFragment d = new ColorPickerDialogFragment();
@@ -35,6 +37,36 @@ The calling activity or fragment should implement `ColorPickerDialogFragment.OnC
 			// do something with color
 		}
 
+
+### Use via Intent
+
+Alternatively include the following XML snippet in your `AndroidManifest.xml`
+
+		<activity android:name="org.dmfs.android.colorpicker.ColorPickerActivity" >
+		    <intent-filter>
+		        <action android:name="org.openintents.action.PICK_COLOR" />
+
+		        <category android:name="android.intent.category.DEFAULT" />
+		    </intent-filter>
+		</activity>
+
+and call the dialog like:
+
+		ColorPickerActivity.start(context, CODE_PICK_COLOR);
+
+This will call an intent with the action `org.openintents.action.PICK_COLOR` allowing the user to use his preferred color picker (if it supports the Open Intent).
+
+In `onActivityResult(int, int, Intent)` you can get the picked color like this:
+
+		@Override
+		protected void onActivityResult(int code, int result, Intent data)
+		{
+			if (result == RESULT_OK && code == CODE_PICK_COLOR)
+			{
+				Integer color = ColorPickerActivity.getColor(data);
+			}
+		}
+
 ## Screen shots
 
 ![](https://raw.github.com/dmfs/color-picker/master/demo/screenshots/screenshot_1.png "Screenshot 1")
@@ -54,4 +86,4 @@ The calling activity or fragment should implement `ColorPickerDialogFragment.OnC
 
 ## License
 
-Copyright (c) Marten Gajda 2013, licensed under GPL version 2 or newer (see `LICENSE`).
+Copyright (c) Marten Gajda 2014, licensed under Apache 2 (see `LICENSE`).
