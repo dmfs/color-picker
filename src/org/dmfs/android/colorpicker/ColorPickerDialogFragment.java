@@ -32,6 +32,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.TextView;
 
 
 /**
@@ -65,6 +67,7 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 	}
 
 	private ViewPager mPager;
+	private TextView mTitleView;
 	private PalettesPagerAdapter mPagerAdapter;
 
 	@Retain
@@ -131,11 +134,9 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 	public void setTitle(CharSequence title)
 	{
 		mTitle = title;
-		// set dialog title if we're shown in a dialog
-		Dialog dialog = getDialog();
-		if (dialog != null)
+		if (mTitleView != null)
 		{
-			dialog.setTitle(title);
+			mTitleView.setText(title);
 		}
 	}
 
@@ -149,11 +150,9 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 	public void setTitle(int title)
 	{
 		mTitleId = title;
-		// set dialog title if we're shown in a dialog
-		Dialog dialog = getDialog();
-		if (dialog != null)
+		if (mTitleView != null)
 		{
-			dialog.setTitle(title);
+			mTitleView.setText(title);
 		}
 	}
 
@@ -169,21 +168,28 @@ public class ColorPickerDialogFragment extends SupportDialogFragment implements 
 		mPager.setAdapter(mPagerAdapter);
 		mPager.setCurrentItem(mPagerAdapter.getCount() / 2 + mSelected);
 
-		Dialog dialog = getDialog();
-		if (dialog != null)
+		mTitleView = (TextView) view.findViewById(android.R.id.title);
+
+		if (mTitleId != 0)
 		{
-			if (mTitleId != 0)
-			{
-				dialog.setTitle(mTitleId);
-			}
-			else if (mTitle != null)
-			{
-				dialog.setTitle(mTitle);
-			}
+			mTitleView.setText(mTitleId);
 		}
-		dialog.setOnCancelListener(this);
+		else if (mTitle != null)
+		{
+			mTitleView.setText(mTitle);
+		}
 
 		return view;
+	}
+
+
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState)
+	{
+		Dialog result = super.onCreateDialog(savedInstanceState);
+		result.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		result.setOnCancelListener(this);
+		return result;
 	}
 
 

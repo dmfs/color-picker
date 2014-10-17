@@ -3,7 +3,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dip" >
+    android:paddingBottom="14dip"
+    android:paddingLeft="22dip"
+    android:paddingRight="22dip"
+    android:paddingTop="14dip" >
 
     <GridView
         xmlns:android="http://schemas.android.com/apk/res/android"

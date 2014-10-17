@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.dmfs.android.colorpicker.SquareViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pager"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:padding="16dp" >
 
-    <org.dmfs.android.view.DrawablePagerTabStrip
-        android:id="@+id/pager_title_strip"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@android:id/title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:paddingBottom="4dip"
-        android:paddingLeft="8dip"
-        android:paddingRight="8dip"
-        android:paddingTop="0dip" />
+        android:layout_margin="8dp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-</org.dmfs.android.colorpicker.SquareViewPager>
+    <org.dmfs.android.colorpicker.SquareViewPager
+        android:id="@+id/pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-8dp"
+        android:layout_marginLeft="-16dp"
+        android:layout_marginRight="-16dp" >
+
+        <org.dmfs.android.view.DrawablePagerTabStrip
+            android:id="@+id/pager_title_strip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:paddingBottom="4dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="0dp" />
+    </org.dmfs.android.colorpicker.SquareViewPager>
+
+</LinearLayout>
