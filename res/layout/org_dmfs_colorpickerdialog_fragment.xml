@@ -14,7 +14,7 @@
         android:maxLines="1"
         android:singleLine="true"
         android:text="@string/org_dmfs_colorpicker_pick_a_color"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <org.dmfs.android.colorpicker.SquareViewPager
