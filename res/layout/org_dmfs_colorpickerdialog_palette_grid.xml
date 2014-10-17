@@ -15,9 +15,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="0px"
         android:columnWidth="99dip"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="8dp"
         android:gravity="center"
         android:horizontalSpacing="8dip"
         android:numColumns="2"
+        android:requiresFadingEdge="vertical"
         android:stretchMode="none"
         android:verticalSpacing="8dip" >
     </GridView>
