@@ -1,0 +1,2 @@
+include ':colorpicker'
+include ':demo'
