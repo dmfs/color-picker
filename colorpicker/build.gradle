@@ -19,6 +19,6 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:21.0.+'
-    compile files('libs/android-retention-magic-1.2.2.jar')
-    compile files('libs/drawablepagertabstrip.jar')
+    compile files('$rootProject.projectDir/libs/android-retention-magic-1.2.2.jar')
+    compile files('$rootProject.projectDir/libs/drawablepagertabstrip.jar')
 }
