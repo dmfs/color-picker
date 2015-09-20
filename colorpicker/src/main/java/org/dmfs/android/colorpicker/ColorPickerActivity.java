@@ -19,6 +19,7 @@ package org.dmfs.android.colorpicker;
 
 import org.dmfs.android.colorpicker.ColorPickerDialogFragment.ColorDialogResultListener;
 import org.dmfs.android.colorpicker.palettes.AbstractPalette;
+import org.dmfs.android.colorpicker.palettes.ArrayPalette;
 import org.dmfs.android.colorpicker.palettes.ColorFactory;
 import org.dmfs.android.colorpicker.palettes.ColorFactory.CombinedColorFactory;
 import org.dmfs.android.colorpicker.palettes.FactoryPalette;
@@ -51,6 +52,12 @@ import android.os.Bundle;
 public class ColorPickerActivity extends FragmentActivity implements ColorDialogResultListener
 {
 
+	private final static int[] MATERIAL_COLORS_PRIMARY = { 0xffe91e63, 0xfff44336, 0xffff5722, 0xffff9800, 0xffffc107, 0xffffeb3b, 0xffcddc39, 0xff8bc34a,
+		0xff4caf50, 0xff009688, 0xff00bcd4, 0xff03a9f4, 0xff2196f3, 0xff3f51b5, 0xff673ab7, 0xff9c27b0 };
+
+	private static final int MATERIAL_COLORS_DARK[] = { 0xffad1457, 0xffc62828, 0xffd84315, 0xffef6c00, 0xffff8f00, 0xfff9a825, 0xff9e9d24, 0xff558b2f,
+		0xff2e7d32, 0xff00695c, 0xff00838f, 0xff0277bd, 0xff1565c0, 0xff283593, 0xff4527a0, 0xff6a1b9a };
+
 	/**
 	 * Color picker action.
 	 */
@@ -64,8 +71,8 @@ public class ColorPickerActivity extends FragmentActivity implements ColorDialog
 	/**
 	 * The palettes to show.
 	 */
-	private final static AbstractPalette[] PALETTES = { new FactoryPalette("rainbow", "Rainbow", ColorFactory.RAINBOW, 16),
-		new FactoryPalette("dark_rainbow", "Dark Rainbow", new ColorFactory.RainbowColorFactory(0.5f, 0.5f), 16),
+	private final static AbstractPalette[] PALETTES = { new ArrayPalette("material_primary", "Material Colors", MATERIAL_COLORS_PRIMARY),
+		new ArrayPalette("material_secondary", "Dark Material Colors", MATERIAL_COLORS_DARK),
 		new FactoryPalette("red", "Red", new CombinedColorFactory(new ColorFactory.ColorShadeFactory(340), ColorFactory.RED), 16),
 		new FactoryPalette("orange", "Orange", new CombinedColorFactory(new ColorFactory.ColorShadeFactory(18), ColorFactory.ORANGE), 16),
 		new FactoryPalette("yellow", "Yellow", new CombinedColorFactory(new ColorFactory.ColorShadeFactory(53), ColorFactory.YELLOW), 16),
@@ -74,7 +81,9 @@ public class ColorPickerActivity extends FragmentActivity implements ColorDialog
 		new FactoryPalette("blue", "Blue", new CombinedColorFactory(new ColorFactory.ColorShadeFactory(210), ColorFactory.BLUE), 16),
 		new FactoryPalette("purple", "Purple", new CombinedColorFactory(new ColorFactory.ColorShadeFactory(265), ColorFactory.PURPLE), 16),
 		new FactoryPalette("pink", "Pink", new CombinedColorFactory(new ColorFactory.ColorShadeFactory(300), ColorFactory.PINK), 16),
-		new FactoryPalette("grey", "Grey", ColorFactory.GREY, 16), new FactoryPalette("pastel", "Pastel", ColorFactory.PASTEL, 16) };
+		new FactoryPalette("grey", "Grey", ColorFactory.GREY, 16), new FactoryPalette("pastel", "Pastel", ColorFactory.PASTEL, 16),
+		new FactoryPalette("rainbow", "Rainbow", ColorFactory.RAINBOW, 16),
+		new FactoryPalette("dark_rainbow", "Dark Rainbow", new ColorFactory.RainbowColorFactory(0.5f, 0.5f), 16) };
 
 	/**
 	 * The id of the palette
