@@ -16,7 +16,7 @@ This is a nice and simple color picker for Android. It allows to show any number
 ### Use as a dialog
 
 To show the dialog, just get an instance, add a number of palettes and call the show method.
-
+```java
 		ColorPickerDialogFragment d = new ColorPickerDialogFragment();
 
 		// set the palettes
@@ -27,10 +27,10 @@ To show the dialog, just get an instance, add a number of palettes and call the 
 		});
 		
 		d.show(getSupportFragmentManager(), tag);
-
+```
 
 The calling activity or fragment should implement `ColorPickerDialogFragment.ColorDialogResultListener` to get the result like:
-
+```java
 		@Override
 		public void onColorChanged(int color, String colorName, String paletteName)
 		{
@@ -42,11 +42,11 @@ The calling activity or fragment should implement `ColorPickerDialogFragment.Col
 		{
 			// handle cancelled color picker dialog
 		}
-
+```
 ### Use via Intent
 
 Alternatively include the following XML snippet in your `AndroidManifest.xml`
-
+```xml
 		<activity android:name="org.dmfs.android.colorpicker.ColorPickerActivity" >
 		    <intent-filter>
 		        <action android:name="org.openintents.action.PICK_COLOR" />
@@ -54,15 +54,15 @@ Alternatively include the following XML snippet in your `AndroidManifest.xml`
 		        <category android:name="android.intent.category.DEFAULT" />
 		    </intent-filter>
 		</activity>
-
+```
 and call the dialog like:
-
+```java
 		ColorPickerActivity.start(context, CODE_PICK_COLOR);
-
+```
 This will call an intent with the action `org.openintents.action.PICK_COLOR` allowing the user to use his preferred color picker (if it supports the Open Intent).
 
 In `onActivityResult(int, int, Intent)` you can get the picked color like this:
-
+```java
 		@Override
 		protected void onActivityResult(int code, int result, Intent data)
 		{
@@ -71,6 +71,7 @@ In `onActivityResult(int, int, Intent)` you can get the picked color like this:
 				Integer color = ColorPickerActivity.getColor(data);
 			}
 		}
+```
 
 ## Screen shots
 
