@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2014 Marten Gajda <marten@dmfs.org>
+ * Copyright 2017 dmfs GmbH
+ *
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +13,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
  */
 
 package org.dmfs.android.colorpicker;
@@ -24,34 +24,33 @@ import android.view.View;
 
 /**
  * A view that's always square. It uses the current width to set its height.
- * 
- * @author Marten Gajda <marten@dmfs.org>
+ *
+ * @author Marten Gajda
  */
-public class SquareView extends View
+public final class SquareView extends View
 {
-	public SquareView(Context context)
-	{
-		super(context);
-	}
+    public SquareView(Context context)
+    {
+        super(context);
+    }
 
 
-	public SquareView(Context context, AttributeSet attrs)
-	{
-		super(context, attrs);
-	}
+    public SquareView(Context context, AttributeSet attrs)
+    {
+        super(context, attrs);
+    }
 
 
-	public SquareView(Context context, AttributeSet attrs, int defStyleAttr)
-	{
-		super(context, attrs, defStyleAttr);
-	}
+    public SquareView(Context context, AttributeSet attrs, int defStyleAttr)
+    {
+        super(context, attrs, defStyleAttr);
+    }
 
 
-	@Override
-	protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec)
-	{
-		final int width = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
-		setMeasuredDimension(width, width);
-	}
-
+    @Override
+    protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec)
+    {
+        final int width = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
+        setMeasuredDimension(width, width);
+    }
 }

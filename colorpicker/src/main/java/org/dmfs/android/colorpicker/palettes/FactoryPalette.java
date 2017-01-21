@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2014 Marten Gajda <marten@dmfs.org>
+ * Copyright 2017 dmfs GmbH
+ *
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +13,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
  */
 
 package org.dmfs.android.colorpicker.palettes;
@@ -21,205 +21,161 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 
-public class FactoryPalette extends AbstractPalette implements Parcelable
+public final class FactoryPalette implements Palette
 {
 
-	/**
-	 * The display name of this palette.
-	 */
-	private String mName;
-
-	/**
-	 * The Id of this palette.
-	 */
-	private String mPaletteId;
-
-	/**
-	 * The colors in this palette.
-	 */
-	private int[] mValues;
-
-	/**
-	 * The number of columns to use for the layout of this palette.
-	 */
-	private int mColumns;
+    public static final Parcelable.Creator<FactoryPalette> CREATOR = new Parcelable.Creator<FactoryPalette>()
+    {
+        @Override
+        public FactoryPalette createFromParcel(Parcel in)
+        {
+            final FactoryPalette state = new FactoryPalette();
+            state.readFromParcel(in);
+            return state;
+        }
 
 
-	/**
-	 * Private constructor for unparcelling;
-	 */
-	private FactoryPalette()
-	{
-	}
+        @Override
+        public FactoryPalette[] newArray(int size)
+        {
+            return new FactoryPalette[size];
+        }
+    };
+
+    /**
+     * The display name of this palette.
+     */
+    private String mName;
+    /**
+     * The Id of this palette.
+     */
+    private String mPaletteId;
+    /**
+     * The colors in this palette.
+     */
+    private int[] mValues;
+    /**
+     * The number of columns to use for the layout of this palette.
+     */
+    private int mColumns;
 
 
-	/**
-	 * Build a new palette with a custom {@link ColorFactory}.
-	 * 
-	 * @param id
-	 *            An identifier for this palette.
-	 * @param name
-	 *            The name of the palette.
-	 * @param colorProvider
-	 *            An instance of {@link ColorFactory} that can return a color for each index.
-	 * @param count
-	 *            The number of colors to generate in this palette.
-	 * 
-	 * @param columns
-	 *            The number of columns to use in the layout
-	 */
-	public FactoryPalette(String id, String name, ColorFactory colorProvider, int count, int columns)
-	{
-		mPaletteId = id;
-		mName = name;
-		int[] values = new int[count];
-		for (int i = 0; i < count; ++i)
-		{
-			values[i] = colorProvider.getColor(i, count);
-		}
-		mValues = values;
-		mColumns = columns;
-	}
+    /**
+     * Private constructor for unparcelling;
+     */
+    private FactoryPalette()
+    {
+    }
 
 
-	/**
-	 * Build a new palette with a custom {@link ColorFactory}.
-	 * 
-	 * @param id
-	 *            An identifier for this palette.
-	 * @param name
-	 *            The name of the palette.
-	 * @param colorProvider
-	 *            An instance of {@link ColorFactory} that can return a color for each index.
-	 * @param count
-	 *            The number of colors to generate in this palette.
-	 */
-	public FactoryPalette(String id, String name, ColorFactory colorProvider, int count)
-	{
-		this(id, name, colorProvider, count, (int) Math.floor(Math.sqrt(count)));
-	}
+    /**
+     * Build a new palette with a custom {@link ColorFactory}.
+     *
+     * @param id
+     *         An identifier for this palette.
+     * @param name
+     *         The name of the palette.
+     * @param colorProvider
+     *         An instance of {@link ColorFactory} that can return a color for each index.
+     * @param count
+     *         The number of colors to generate in this palette.
+     * @param columns
+     *         The number of columns to use in the layout
+     */
+    public FactoryPalette(String id, String name, ColorFactory colorProvider, int count, int columns)
+    {
+        mPaletteId = id;
+        mName = name;
+        int[] values = new int[count];
+        for (int i = 0; i < count; ++i)
+        {
+            values[i] = colorProvider.colorAt(i, count);
+        }
+        mValues = values;
+        mColumns = columns;
+    }
 
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.dmfs.android.colorpicker.palettes.AbstractPalette#getName()
-	 */
-	@Override
-	public String getName()
-	{
-		return mName;
-	}
+    /**
+     * Build a new palette with a custom {@link ColorFactory}.
+     *
+     * @param id
+     *         An identifier for this palette.
+     * @param name
+     *         The name of the palette.
+     * @param colorProvider
+     *         An instance of {@link ColorFactory} that can return a color for each index.
+     * @param count
+     *         The number of colors to generate in this palette.
+     */
+    public FactoryPalette(String id, String name, ColorFactory colorProvider, int count)
+    {
+        this(id, name, colorProvider, count, (int) Math.floor(Math.sqrt(count)));
+    }
 
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.dmfs.android.colorpicker.palettes.AbstractPalette#getId()
-	 */
-	@Override
-	public String getId()
-	{
-		return mPaletteId;
-	}
+    @Override
+    public String name()
+    {
+        return mName;
+    }
 
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.dmfs.android.colorpicker.palettes.AbstractPalette#getNumberOfColors()
-	 */
-	@Override
-	public int getNumberOfColors()
-	{
-		return mValues.length;
-	}
+    @Override
+    public String id()
+    {
+        return mPaletteId;
+    }
 
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.dmfs.android.colorpicker.palettes.AbstractPalette#getColor(int)
-	 */
-	@Override
-	public int getColor(int index)
-	{
-		return mValues[index];
-	}
+    @Override
+    public int numberOfColors()
+    {
+        return mValues.length;
+    }
 
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.dmfs.android.colorpicker.palettes.AbstractPalette#getColorName(int)
-	 */
-	@Override
-	public String getColorName(int index)
-	{
-		return null;
-	}
+    @Override
+    public int colorAt(int index)
+    {
+        return mValues[index];
+    }
 
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.dmfs.android.colorpicker.palettes.AbstractPalette#getNumberOfColumns()
-	 */
-	@Override
-	public int getNumberOfColumns()
-	{
-		return mColumns;
-	}
+    @Override
+    public String nameOfColorAt(int index)
+    {
+        return null;
+    }
 
 
-	@Override
-	public int describeContents()
-	{
-		return 0;
-	}
+    @Override
+    public int numberOfColumns()
+    {
+        return mColumns;
+    }
 
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags)
-	{
-		dest.writeString(mName);
-		dest.writeIntArray(mValues);
-		dest.writeInt(mColumns);
-	}
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
 
 
-	public void readFromParcel(Parcel in)
-	{
-		mName = in.readString();
-		mValues = in.createIntArray();
-		mColumns = in.readInt();
-	}
-
-	public static final Parcelable.Creator<FactoryPalette> CREATOR = new Parcelable.Creator<FactoryPalette>()
-	{
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.os.Parcelable.Creator#createFromParcel(android.os.Parcel)
-		 */
-		@Override
-		public FactoryPalette createFromParcel(Parcel in)
-		{
-			final FactoryPalette state = new FactoryPalette();
-			state.readFromParcel(in);
-			return state;
-		}
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeString(mName);
+        dest.writeIntArray(mValues);
+        dest.writeInt(mColumns);
+    }
 
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.os.Parcelable.Creator#newArray(int)
-		 */
-		@Override
-		public FactoryPalette[] newArray(int size)
-		{
-			return new FactoryPalette[size];
-		}
-	};
+    public void readFromParcel(Parcel in)
+    {
+        mName = in.readString();
+        mValues = in.createIntArray();
+        mColumns = in.readInt();
+    }
 }

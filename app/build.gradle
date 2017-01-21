@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 23
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         applicationId "org.dmfs.android.colorpicker"
         minSdkVersion 8
-        targetSdkVersion 18
+        targetSdkVersion 23
     }
 
     buildTypes {

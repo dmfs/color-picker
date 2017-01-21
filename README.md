@@ -7,7 +7,7 @@ This is a nice and simple color picker for Android. It allows to show any number
 
 ## Requirements
 
-* Android support library 19 or newer
+* Android support library 23 or newer
 * [Retention Magic](https://github.com/dmfs/retention-magic)
 * [DrawablePagerTitleStrip](https://github.com/dmfs/DrawablePagerTitleStrip)
 
@@ -74,11 +74,7 @@ In `onActivityResult(int, int, Intent)` you can get the picked color like this:
 
 ## Screen shots
 
-![](https://raw.github.com/dmfs/color-picker/master/demo/screenshots/screenshot_1.png "Screenshot 1")
-
-![](https://raw.github.com/dmfs/color-picker/master/demo/screenshots/screenshot_2.png "Screenshot 2")
-
-![](https://raw.github.com/dmfs/color-picker/master/demo/screenshots/screenshot_3.png "Screenshot 3")
+![](https://raw.github.com/dmfs/color-picker/master/screenshots/actionshot.png "Action shot")
 
 
 ## TODO
@@ -91,4 +87,4 @@ In `onActivityResult(int, int, Intent)` you can get the picked color like this:
 
 ## License
 
-Copyright (c) Marten Gajda 2014, licensed under Apache 2 (see `LICENSE`).
+Copyright (c) dmfs GmbH 2017, licensed under Apache 2 (see `LICENSE`).
