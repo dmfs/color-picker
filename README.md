@@ -45,16 +45,12 @@ The calling activity or fragment should implement `ColorPickerDialogFragment.Col
 ```
 ### Use via Intent
 
-Alternatively include the following XML snippet in your `AndroidManifest.xml`
-```xml
-		<activity android:name="org.dmfs.android.colorpicker.ColorPickerActivity" >
-		    <intent-filter>
-		        <action android:name="org.openintents.action.PICK_COLOR" />
-
-		        <category android:name="android.intent.category.DEFAULT" />
-		    </intent-filter>
-		</activity>
+Alternatively you can use the picker via `Intent`. To do so just include the following dependency
+ 
 ```
+implementation "com.github.dmfs.color-picker:colorpicker-activity:1.1"
+```
+
 and call the dialog like:
 ```java
 		ColorPickerActivity.start(context, CODE_PICK_COLOR);

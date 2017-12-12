@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="org.dmfs.android.colorpicker.activity">
+
+    <application>
+        <activity
+                android:name=".ColorPickerActivity"
+                android:theme="@style/org_dmfs_colorpicker_AppTheme"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="org.openintents.action.PICK_COLOR"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

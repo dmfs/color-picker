@@ -15,12 +15,13 @@
  * limitations under the License.
  */
 
-package org.dmfs.android.colorpicker;
+package org.dmfs.android.colorpicker.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import org.dmfs.android.colorpicker.ColorPickerDialogFragment;
 import org.dmfs.android.colorpicker.ColorPickerDialogFragment.ColorDialogResultListener;
 import org.dmfs.android.colorpicker.palettes.ArrayPalette;
 import org.dmfs.android.colorpicker.palettes.ColorFactory;
@@ -35,18 +36,6 @@ import org.dmfs.android.retentionmagic.annotations.Retain;
 
 /**
  * An activity that prompts the user to pick a color.
- * <p>
- * To use it include the following XML fragment in your <code>AndroidManifest.xml</code>
- * <p>
- * <pre>
- *        &lt;activity android:name="org.dmfs.android.colorpicker.ColorPickerActivity" >
- *             &lt;intent-filter>
- *                 &lt;action android:name="org.openintents.action.PICK_COLOR" />
- *
- *                 &lt;category android:name="android.intent.category.DEFAULT" />
- *             &lt;/intent-filter>
- *         &lt;/activity>
- * </pre>
  *
  * @author Marten Gajda
  */
@@ -136,7 +125,7 @@ public final class ColorPickerActivity extends FragmentActivity implements Color
     {
         ColorPickerDialogFragment d = new ColorPickerDialogFragment();
         d.setPalettes(PALETTES);
-        d.setTitle(R.string.org_dmfs_colorpicker_pick_a_color);
+        d.setTitle(org.dmfs.android.colorpicker.R.string.org_dmfs_colorpicker_pick_a_color);
         d.selectPaletteId(mPaletteId);
         d.show(getSupportFragmentManager(), "");
     }

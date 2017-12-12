@@ -100,7 +100,7 @@ public final class PaletteFragment extends SupportFragment implements OnItemClic
                 else
                 {
                     /*
-					 * TODO: getHorizontalSpacing() has been introduced in SDK level 16. We need to find a way to get get the actual spacing. Until then we use
+                     * TODO: getHorizontalSpacing() has been introduced in SDK level 16. We need to find a way to get get the actual spacing. Until then we use
 					 * a hard coded value of 8 dip.
 					 *
 					 * One way would be to use a dimension in the layout. That would allow us to resolve the dimension here. However, that would be one step
