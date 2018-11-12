@@ -21,6 +21,6 @@
             android:numColumns="2"
             android:requiresFadingEdge="vertical"
             android:stretchMode="none"
-            android:verticalSpacing="8dip"></GridView>
+            android:verticalSpacing="8dip"/>
 
 </LinearLayout>

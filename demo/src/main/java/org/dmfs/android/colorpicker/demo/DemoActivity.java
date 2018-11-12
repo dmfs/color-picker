@@ -18,26 +18,26 @@
 package org.dmfs.android.colorpicker.demo;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import org.dmfs.android.colorpicker.ColorPickerDialogFragment;
 import org.dmfs.android.colorpicker.ColorPickerDialogFragment.ColorDialogResultListener;
-import org.dmfs.android.colorpicker.palettes.ColorShadeFactory;
-import org.dmfs.android.colorpicker.palettes.Palette;
 import org.dmfs.android.colorpicker.palettes.ArrayPalette;
 import org.dmfs.android.colorpicker.palettes.ColorFactory;
+import org.dmfs.android.colorpicker.palettes.ColorShadeFactory;
 import org.dmfs.android.colorpicker.palettes.CombinedColorFactory;
 import org.dmfs.android.colorpicker.palettes.FactoryPalette;
+import org.dmfs.android.colorpicker.palettes.Palette;
 import org.dmfs.android.colorpicker.palettes.RainbowColorFactory;
 import org.dmfs.android.colorpicker.palettes.RandomPalette;
-import org.dmfs.android.retentionmagic.FragmentActivity;
 import org.dmfs.android.retentionmagic.annotations.Retain;
 
 import java.util.ArrayList;
 
 
-public class DemoActivity extends FragmentActivity implements ColorDialogResultListener
+public class DemoActivity extends AppCompatActivity implements ColorDialogResultListener
 {
     private final static int[] COLORS = new int[] {
             0xff000000, 0xff0000ff, 0xff00ff00, 0xffff0000, 0xffffff00, 0xff00ffff, 0xffff00ff, 0xff404040,
@@ -62,6 +62,8 @@ public class DemoActivity extends FragmentActivity implements ColorDialogResultL
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        //getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
         setContentView(R.layout.activity_demo);
         mTextView = (TextView) findViewById(R.id.textView2);
         mColorBox = findViewById(R.id.colorbox);

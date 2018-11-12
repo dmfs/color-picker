@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
 
     defaultConfig {
         applicationId "org.dmfs.android.colorpicker.demo"
-        minSdkVersion 9
-        targetSdkVersion 25
+        minSdkVersion 14
+        targetSdkVersion 26
     }
 
     buildTypes {
@@ -19,4 +19,5 @@ android {
 
 dependencies {
     compile project(':colorpicker')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
@@ -13,9 +14,8 @@
             android:layout_margin="8dp"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="@string/org_dmfs_colorpicker_pick_a_color"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:text="@string/org_dmfs_colorpicker_pick_a_color"/>
 
     <org.dmfs.android.colorpicker.SquareViewPager
             android:id="@+id/pager"

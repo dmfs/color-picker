@@ -87,9 +87,6 @@ public final class PaletteGridAdapter extends BaseAdapter
         View view = convertView;
         if (view == null)
         {
-            /*
-             * TODO: build the layout programmatically
-			 */
             view = mLayoutInflater.inflate(R.layout.org_dmfs_colorpickerdialog_palette_field, null);
         }
 

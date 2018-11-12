@@ -107,15 +107,7 @@ public final class PaletteFragment extends SupportFragment implements OnItemClic
 					 * away from a library without resource dependencies. Maybe there is an Android dimension resource with a reasonable value?
 					 */
                     DisplayMetrics metrics = inflater.getContext().getResources().getDisplayMetrics();
-                    if (android.os.Build.VERSION.SDK_INT > 10)
-                    {
-                        columnSpacing = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, metrics) * (mAdapter.getNumColumns() - 1);
-                    }
-                    else
-                    {
-                        // Android 2 seems to add spacing around the entire gridview
-                        columnSpacing = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, metrics) * mAdapter.getNumColumns();
-                    }
+                    columnSpacing = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, metrics) * (mAdapter.getNumColumns() - 1);
                 }
 
                 // width of a single column

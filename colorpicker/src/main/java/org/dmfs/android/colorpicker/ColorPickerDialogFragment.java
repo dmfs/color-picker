@@ -20,8 +20,12 @@ package org.dmfs.android.colorpicker;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,10 +33,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
+import org.dmfs.android.bolts.color.colors.AttributeColor;
 import org.dmfs.android.colorpicker.PaletteFragment.OnColorSelectedListener;
 import org.dmfs.android.colorpicker.palettes.Palette;
 import org.dmfs.android.retentionmagic.SupportDialogFragment;
 import org.dmfs.android.retentionmagic.annotations.Retain;
+import org.dmfs.android.view.DrawablePagerTabStrip;
 import org.dmfs.android.view.ViewPager;
 
 
@@ -136,14 +142,13 @@ public final class ColorPickerDialogFragment extends SupportDialogFragment imple
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.org_dmfs_colorpickerdialog_fragment, container);
-
-        mPager = (ViewPager) view.findViewById(R.id.pager);
+        mPager = view.findViewById(R.id.pager);
         mPagerAdapter = new PalettesPagerAdapter(getResources(), getChildFragmentManager(), mPalettes);
         mPagerAdapter.notifyDataSetChanged();
         mPager.setAdapter(mPagerAdapter);
         mPager.setCurrentItem(mPagerAdapter.getCount() / 2 + mSelected);
 
-        mTitleView = (TextView) view.findViewById(android.R.id.title);
+        mTitleView = view.findViewById(android.R.id.title);
 
         if (mTitleId != 0)
         {
@@ -154,16 +159,27 @@ public final class ColorPickerDialogFragment extends SupportDialogFragment imple
             mTitleView.setText(mTitle);
         }
 
+        DrawablePagerTabStrip titleStrip = view.findViewById(R.id.pager_title_strip);
+        titleStrip.setTabIndicatorColor(new AttributeColor(getContext(), R.attr.colorAccent).argb());
         return view;
     }
 
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
         Dialog result = super.onCreateDialog(savedInstanceState);
         result.requestWindowFeature(Window.FEATURE_NO_TITLE);
         result.setOnCancelListener(this);
+        if (Build.VERSION.SDK_INT >= 21)
+        {
+            // set a background with round corners
+            result.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.colorpicker_dialog_background));
+            // ensure we still have the right drop shadow in place
+            ViewCompat.setElevation(result.getWindow().getDecorView(), 24);
+        }
+        // else: on ancient devices we'll just continue using default square corners
         return result;
     }
 

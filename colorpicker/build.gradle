@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 25
+        minSdkVersion 14
+        targetSdkVersion 26
     }
 
     buildTypes {
@@ -17,7 +17,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:25.4.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.github.dmfs.bolts:color-bolts:2b1b95d'
     compile files('libs/android-retention-magic-1.2.2.jar')
     compile files('libs/drawablepagertabstrip.jar')
 }
