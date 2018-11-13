@@ -87,7 +87,7 @@ public final class PaletteGridAdapter extends BaseAdapter
         View view = convertView;
         if (view == null)
         {
-            view = mLayoutInflater.inflate(R.layout.org_dmfs_colorpickerdialog_palette_field, null);
+            view = mLayoutInflater.inflate(R.layout.dmfs_colorpickerdialog_palette_field, null);
         }
 
         // set the background to a colored circle

@@ -18,6 +18,7 @@ android {
 }
 
 dependencies {
-    compile project(':colorpicker')
+    implementation project(':colorpicker')
     implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.github.dmfs:retention-magic:1.3'
 }

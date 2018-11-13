@@ -69,7 +69,7 @@ public final class PaletteFragment extends SupportFragment implements OnItemClic
 		/*
          * TODO: build the layout programmatically to get rid of the resources, so we can distribute this in a single jar
 		 */
-        final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.org_dmfs_colorpickerdialog_palette_grid, container, false);
+        final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.dmfs_colorpickerdialog_palette_grid, container, false);
         final GridView gridview = (GridView) rootView.findViewById(android.R.id.content);
 
         mAdapter = new PaletteGridAdapter(getActivity(), mPalette);

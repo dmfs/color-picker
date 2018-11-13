@@ -141,7 +141,7 @@ public final class ColorPickerDialogFragment extends SupportDialogFragment imple
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.org_dmfs_colorpickerdialog_fragment, container);
+        View view = inflater.inflate(R.layout.dmfs_colorpickerdialog_fragment, container);
         mPager = view.findViewById(R.id.pager);
         mPagerAdapter = new PalettesPagerAdapter(getResources(), getChildFragmentManager(), mPalettes);
         mPagerAdapter.notifyDataSetChanged();
@@ -175,7 +175,7 @@ public final class ColorPickerDialogFragment extends SupportDialogFragment imple
         if (Build.VERSION.SDK_INT >= 21)
         {
             // set a background with round corners
-            result.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.colorpicker_dialog_background));
+            result.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.dmfs_colorpicker_dialog_background));
             // ensure we still have the right drop shadow in place
             ViewCompat.setElevation(result.getWindow().getDecorView(), 24);
         }

@@ -1,3 +1,2 @@
-include ':colorpicker', ':colorpicker-activity'
+include ':colorpicker'
 include ':demo'
-include ':app'
